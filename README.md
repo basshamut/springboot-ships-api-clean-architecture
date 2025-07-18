@@ -60,35 +60,40 @@ El proyecto implementa **Clean Architecture** (Arquitectura Limpia) siguiendo lo
 
 ### 📊 Diagrama de Arquitectura Limpia
 
+🌐 INFRASTRUCTURE LAYER
+🎯 PRESENTATION LAYER
+📦 APPLICATION LAYER
+🧠 DOMAIN LAYER
+
 ```
-    ┌─────────────────────────────────────────────────────────────────┐
-    │                     🌐 INFRASTRUCTURE LAYER                     │
-    │  ┌─────────────────────────────────────────────────────────┐    │
-    │  │                🎯 PRESENTATION LAYER                    │    │
-    │  │  ┌─────────────────────────────────────────────────┐    │    │
-    │  │  │              📦 APPLICATION LAYER               │    │    │
-    │  │  │  ┌─────────────────────────────────────────┐    │    │    │
-    │  │  │  │            🧠 DOMAIN LAYER              │    │    │    │
-    │  │  │  │                                         │    │    │    │
-    │  │  │  │  • Entidades (Business Objects)        │    │    │    │
-    │  │  │  │  • Value Objects                        │    │    │    │
-    │  │  │  │  • Domain Services                      │    │    │    │
-    │  │  │  │  • Repository Interfaces                │    │    │    │
-    │  │  │  │                                         │    │    │    │
-    │  │  │  └─────────────────────────────────────────┘    │    │    │
-    │  │  │  • Use Cases (Business Logic)                   │    │    │
-    │  │  │  • Application Services                         │    │    │
-    │  │  │  • DTOs y Mappers                               │    │    │
-    │  │  └─────────────────────────────────────────────────┘    │    │
-    │  │  • Controllers (REST Endpoints)                         │    │
-    │  │  • Exception Handlers                                  │    │
-    │  │  • Security Configuration                               │    │
-    │  └─────────────────────────────────────────────────────────┘    │
-    │  • Repository Implementations                                   │
-    │  • Database Configuration                                       │
-    │  • External Services (RabbitMQ, Kafka)                         │
-    │  • Observability (Metrics, Tracing)                            │
-    └─────────────────────────────────────────────────────────────────┘
+    ┌─────────────────────────────────────────────────────────┐
+    │                    INFRASTRUCTURE LAYER                 │
+    │  ┌─────────────────────────────────────────────────┐    │
+    │  │                 PRESENTATION LAYER              │    │
+    │  │  ┌─────────────────────────────────────────┐    │    │
+    │  │  │              APPLICATION LAYER          │    │    │
+    │  │  │  ┌─────────────────────────────────┐    │    │    │
+    │  │  │  │           DOMAIN LAYER          │    │    │    │
+    │  │  │  │                                 │    │    │    │
+    │  │  │  │  • Entidades (Business Objects) │    │    │    │
+    │  │  │  │  • Value Objects                │    │    │    │
+    │  │  │  │  • Domain Services              │    │    │    │
+    │  │  │  │  • Repository Interfaces        │    │    │    │
+    │  │  │  │                                 │    │    │    │
+    │  │  │  └─────────────────────────────────┘    │    │    │
+    │  │  │  • Use Cases (Business Logic)           │    │    │
+    │  │  │  • Application Services                 │    │    │
+    │  │  │  • DTOs y Mappers                       │    │    │
+    │  │  └─────────────────────────────────────────┘    │    │
+    │  │  • Controllers (REST Endpoints)                 │    │
+    │  │  • Exception Handlers                           │    │
+    │  │  • Security Configuration                       │    │
+    │  └─────────────────────────────────────────────────┘    │
+    │  • Repository Implementations                           │
+    │  • Database Configuration                               │
+    │  • External Services (RabbitMQ, Kafka)                  │
+    │  • Observability (Metrics, Tracing)                     │
+    └─────────────────────────────────────────────────────────┘
 ```
 
 ### � Estructura de Capas Implementada
@@ -1053,6 +1058,210 @@ Application Logs + Trace ID + Span ID = Observabilidad Completa
 - [Grafana Dashboard Best Practices](https://grafana.com/docs/grafana/latest/dashboards/)
 - [Zipkin Architecture](https://zipkin.io/pages/architecture.html)
 - [Spring Boot Actuator Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
+
+### 🏗️ **Evolución hacia Modularización**
+
+La modularización es el **próximo paso evolutivo** natural de nuestro proyecto. Aunque actualmente implementamos Clean Architecture mediante convenciones de paquetes, la modularización proporcionaría **límites físicos** que harían imposible violar la arquitectura.
+
+#### **🎯 Estructura Modular Propuesta**
+
+```
+📁 jrhub-core-api/
+├── 📄 pom.xml                           # Parent POM
+├── 🧠 jrhub-domain/                     # Módulo Domain
+│   ├── 📄 pom.xml                       # Sin dependencias externas
+│   └── 📁 src/main/java/com/jrhub/domain/
+│       ├── SpaceShip.java
+│       ├── User.java
+│       ├── MovieSpaceShipRepository.java
+│       └── UserRepository.java
+│
+├── 📦 jrhub-application/                # Módulo Application  
+│   ├── 📄 pom.xml                       # Solo depende de domain
+│   └── 📁 src/main/java/com/jrhub/application/
+│       ├── usecases/
+│       ├── services/
+│       ├── dto/
+│       └── mappers/
+│
+├── 🌐 jrhub-infrastructure/             # Módulo Infrastructure
+│   ├── 📄 pom.xml                       # Depende de domain y application
+│   └── 📁 src/main/java/com/jrhub/infrastructure/
+│       ├── persistence/
+│       ├── messaging/
+│       ├── security/
+│       └── config/
+│
+├── 🎯 jrhub-presentation/               # Módulo Presentation
+│   ├── 📄 pom.xml                       # Solo depende de application
+│   └── 📁 src/main/java/com/jrhub/api/
+│       ├── controllers/
+│       ├── security/
+│       └── exceptions/
+│
+└── 🚀 jrhub-application-runner/         # Módulo Main
+    ├── 📄 pom.xml                       # Depende de todos los módulos
+    └── 📁 src/main/java/com/jrhub/
+        └── JrHubApplication.java
+```
+
+#### **🔒 Control de Dependencias por Módulo**
+
+```xml
+<!-- jrhub-domain/pom.xml -->
+<dependencies>
+    <!-- SIN DEPENDENCIAS EXTERNAS - CORE PURO -->
+</dependencies>
+
+<!-- jrhub-application/pom.xml -->
+<dependencies>
+    <dependency>
+        <groupId>com.jrhub</groupId>
+        <artifactId>jrhub-domain</artifactId>
+    </dependency>
+    <!-- MapStruct, validation, etc. -->
+</dependencies>
+
+<!-- jrhub-infrastructure/pom.xml -->
+<dependencies>
+    <dependency>
+        <groupId>com.jrhub</groupId>
+        <artifactId>jrhub-domain</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.jrhub</groupId>
+        <artifactId>jrhub-application</artifactId>
+    </dependency>
+    <!-- Spring Data JPA, RabbitMQ, Kafka, JWT, etc. -->
+</dependencies>
+
+<!-- jrhub-presentation/pom.xml -->
+<dependencies>
+    <dependency>
+        <groupId>com.jrhub</groupId>
+        <artifactId>jrhub-application</artifactId>
+    </dependency>
+    <!-- Spring Web, Security, etc. -->
+</dependencies>
+```
+
+#### **🛡️ Ventajas de la Modularización**
+
+1. **🔒 Límites Físicos Imposibles de Violar**
+   ```java
+   // ❌ ESTO SERÍA IMPOSIBLE - Error de compilación
+   import com.jrhub.infrastructure.JwtService; // No está en el classpath!
+   
+   @RestController
+   public class LoginController {
+       // Compilación fallará - infrastructure no disponible
+   }
+   ```
+
+2. **📦 Reutilización de Módulos**
+   ```xml
+   <!-- Otro proyecto puede usar solo el dominio -->
+   <dependency>
+       <groupId>com.jrhub</groupId>
+       <artifactId>jrhub-domain</artifactId>
+       <version>1.0.0</version>
+   </dependency>
+   ```
+
+3. **🧪 Testing Mejorado por Módulo**
+   ```bash
+   mvn test -pl jrhub-domain        # Solo tests de dominio
+   mvn test -pl jrhub-application   # Solo tests de aplicación
+   mvn test -pl jrhub-infrastructure # Solo tests de infraestructura
+   ```
+
+4. **⚡ Builds Incrementales**
+   ```bash
+   # Solo rebuilding módulos que cambiaron
+   mvn clean install -pl jrhub-application -am
+   ```
+
+5. **👥 Equipos Especializados**
+   - **Team Domain**: Solo trabaja en `jrhub-domain`
+   - **Team Infrastructure**: Solo `jrhub-infrastructure` 
+   - **Team API**: Solo `jrhub-presentation`
+
+#### **🔄 Migración Gradual Sugerida**
+
+**Fase 1: Preparación**
+```bash
+# 1. Crear estructura de módulos
+mkdir jrhub-domain jrhub-application jrhub-infrastructure jrhub-presentation
+
+# 2. Mover clases a sus módulos correspondientes
+mv src/main/java/com/jrhub/domain/* jrhub-domain/src/main/java/com/jrhub/domain/
+mv src/main/java/com/jrhub/application/* jrhub-application/src/main/java/com/jrhub/application/
+# etc...
+```
+
+**Fase 2: Configuración Maven**
+```xml
+<!-- Parent pom.xml -->
+<modules>
+    <module>jrhub-domain</module>
+    <module>jrhub-application</module>
+    <module>jrhub-infrastructure</module>
+    <module>jrhub-presentation</module>
+    <module>jrhub-application-runner</module>
+</modules>
+```
+
+**Fase 3: Validación**
+```bash
+mvn clean compile  # Debe fallar si hay violaciones arquitectónicas
+```
+
+#### **📊 Comparación: Antes vs Después**
+
+| Aspecto | **Actual (Paquetes)** | **Propuesto (Módulos)** |
+|---------|----------------------|------------------------|
+| **Límites** | Solo por convención | Físicos (Maven) |
+| **Violaciones** | Posibles sin darse cuenta | Error de compilación |
+| **Reutilización** | Difícil | Fácil (artifacts independientes) |
+| **Testing** | Todo junto | Por módulo |
+| **CI/CD** | Build completo siempre | Builds incrementales |
+| **Equipos** | Todos en el mismo código | Especializados por módulo |
+
+#### **🚀 Beneficios Adicionales**
+
+1. **Microservicios Ready**
+   ```java
+   // jrhub-domain puede convertirse en shared library
+   // jrhub-infrastructure-events → Event Service
+   // jrhub-infrastructure-persistence → Data Service
+   ```
+
+2. **Versionado Independiente**
+   ```xml
+   <dependency>
+       <groupId>com.jrhub</groupId>
+       <artifactId>jrhub-domain</artifactId>
+       <version>2.1.0</version>  <!-- Domain evoluciona independiente -->
+   </dependency>
+   ```
+
+3. **Performance de Build**
+   ```bash
+   # Solo cambios en presentation
+   mvn clean install -pl jrhub-presentation -am  # 80% más rápido
+   ```
+
+#### **🎯 Decisión Recomendada**
+
+**SÍ, definitivamente tiene sentido modularizar** porque:
+
+- ✅ **Enforcement Automático**: Maven impide violaciones arquitectónicas
+- ✅ **Escalabilidad**: Equipos pueden trabajar independientemente
+- ✅ **Reutilización**: Módulos como building blocks
+- ✅ **Performance**: Builds más rápidos
+- ✅ **Microservices**: Base para futura evolución
+
+**Momento Ideal**: **Ahora**, cuando la arquitectura está estabilizada y antes de que el equipo crezca.
 
 
 
