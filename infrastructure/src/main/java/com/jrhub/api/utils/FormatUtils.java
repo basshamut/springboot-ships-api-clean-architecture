@@ -14,7 +14,7 @@ public class FormatUtils {
         final String path = request.getRequestURI();
         final String message = ex.getMessage();
         log.debug("Returning HttpStatus: {} for path: {} , message: {} ", status, path, message);
-        return new HttpErrorInfoDto(status, path, message);
+        return new HttpErrorInfoDto(status.value(), path, message);
     }
 
 }

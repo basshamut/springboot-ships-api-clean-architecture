@@ -1,8 +1,8 @@
 package com.jrhub.api.usecase;
 
-import com.jrhub.api.domain.model.Auth;
-import com.jrhub.api.domain.repository.UserRepository;
-import com.jrhub.api.domain.usecase.user.UserUseCase;
+import com.jrhub.api.model.Auth;
+import com.jrhub.api.repository.UserRepository;
+import com.jrhub.api.usecase.user.UserUseCase;
 
 import java.util.Base64;
 import java.util.HashSet;

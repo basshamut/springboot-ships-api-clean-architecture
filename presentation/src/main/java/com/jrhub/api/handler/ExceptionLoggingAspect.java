@@ -1,9 +1,9 @@
-package com.jrhub.api.presentation.handler;
+package com.jrhub.api.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import com.jrhub.api.domain.exception.ServiceException;
+import com.jrhub.api.exception.ServiceException;
 import org.springframework.stereotype.Component;
 
 @Aspect

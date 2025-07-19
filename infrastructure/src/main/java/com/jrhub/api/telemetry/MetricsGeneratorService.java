@@ -1,6 +1,6 @@
 package com.jrhub.api.telemetry;
 
-import com.jrhub.api.domain.service.MetricsService;
+import com.jrhub.api.service.MetricsService;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;

@@ -1,4 +1,4 @@
-package com.jrhub.api.domain.model;
+package com.jrhub.api.model;
 
 import java.io.Serializable;
 import java.util.Objects;

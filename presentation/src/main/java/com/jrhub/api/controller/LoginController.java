@@ -1,8 +1,8 @@
-package com.jrhub.api.presentation.controller;
+package com.jrhub.api.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jrhub.api.dto.LoginRequestJson;
+import com.jrhub.api.dto.LoginRequestDto;
 import com.jrhub.api.service.JwtService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +31,8 @@ public class LoginController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<JsonNode> login(@RequestBody @NotNull LoginRequestJson loginRequestJson) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestJson.getUsername(), loginRequestJson.getPassword()));
+    public ResponseEntity<JsonNode> login(@RequestBody @NotNull LoginRequestDto loginRequestDto) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.username(), loginRequestDto.password()));
         if (authentication.isAuthenticated()) {
             var token = jwtService.generateToken(authentication);
             var responseMapped = objectMapper.createObjectNode();

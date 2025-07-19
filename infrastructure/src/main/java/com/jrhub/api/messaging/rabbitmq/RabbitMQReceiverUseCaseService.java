@@ -1,6 +1,6 @@
 package com.jrhub.api.messaging.rabbitmq;
 
-import com.jrhub.api.domain.usecase.audit.AuditMessageReceiverUseCase;
+import com.jrhub.api.usecase.audit.AuditMessageReceiverUseCase;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

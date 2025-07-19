@@ -1,7 +1,7 @@
 package com.jrhub.api.messaging.rabbitmq;
 
-import com.jrhub.api.domain.model.AuditEvent;
-import com.jrhub.api.domain.usecase.audit.AuditMessageSenderUseCase;
+import com.jrhub.api.model.AuditEvent;
+import com.jrhub.api.usecase.audit.AuditMessageSenderUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.jrhub.api.dto.AuditEventDto;
@@ -19,7 +19,7 @@ public class RabbitMQSenderUseCaseService implements AuditMessageSenderUseCase<A
 
     @Override
     public void sendAuditMessage(AuditEvent message) {
-        AuditEventDto dto = AuditEventMapper.MAPPER.toDto(message);
+        AuditEventDto dto = AuditEventMapper.INSTANCE.toDto(message);
         rabbitTemplate.convertAndSend(AUDIT_QUEUE, dto);
     }
 }

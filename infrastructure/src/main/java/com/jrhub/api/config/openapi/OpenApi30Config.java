@@ -1,4 +1,4 @@
-package com.jrhub.api.infrastructure.config.openapi;
+package com.jrhub.api.config.openapi;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

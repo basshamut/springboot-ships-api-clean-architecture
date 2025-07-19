@@ -1,9 +1,9 @@
-package com.jrhub.api.presentation.handler;
+package com.jrhub.api.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import com.jrhub.api.dto.HttpErrorInfoDto;
-import com.jrhub.api.domain.exception.ServiceException;
+import com.jrhub.api.exception.ServiceException;
 import com.jrhub.api.utils.FormatUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

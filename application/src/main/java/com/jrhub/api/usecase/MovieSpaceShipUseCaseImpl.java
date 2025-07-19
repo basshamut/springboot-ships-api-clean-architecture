@@ -1,19 +1,15 @@
 package com.jrhub.api.usecase;
 
-import com.jrhub.api.domain.exception.ServiceException;
-import com.jrhub.api.domain.model.AuditEvent;
-import com.jrhub.api.domain.model.MovieSpaceShip;
-import com.jrhub.api.domain.repository.MovieSpaceShipRepository;
-import com.jrhub.api.domain.usecase.audit.AuditMessageSenderUseCase;
-import com.jrhub.api.domain.usecase.moviespaceship.MovieSpaceShipUseCase;
+import com.jrhub.api.exception.ServiceException;
+import com.jrhub.api.model.AuditEvent;
+import com.jrhub.api.model.MovieSpaceShip;
+import com.jrhub.api.repository.MovieSpaceShipRepository;
+import com.jrhub.api.usecase.audit.AuditMessageSenderUseCase;
+import com.jrhub.api.usecase.moviespaceship.MovieSpaceShipUseCase;
 
 import java.util.List;
 import java.util.Set;
 
-/**
- * Domain Service implementing the use case
- * Contains business rules and orchestrates domain operations
- */
 public class MovieSpaceShipUseCaseImpl implements MovieSpaceShipUseCase {
 
     private final MovieSpaceShipRepository repository;
@@ -75,17 +71,17 @@ public class MovieSpaceShipUseCaseImpl implements MovieSpaceShipUseCase {
     }
 
     @Override
-    public MovieSpaceShip updateSpaceShip(MovieSpaceShip movieSpaceShip, String user) {
+    public MovieSpaceShip updateSpaceShip(Long id, String user, MovieSpaceShip movieSpaceShip) {
         if (movieSpaceShip == null) {
             throw new ServiceException("MovieSpaceShip cannot be null", 400);
         }
 
-        if (movieSpaceShip.getId() == null) {
+        if (id == null) {
             throw new ServiceException("SpaceShip id cannot be null for update", 400);
         }
 
-        if (!repository.existsById(movieSpaceShip.getId())) {
-            throw new ServiceException("SpaceShip not found with id: " + movieSpaceShip.getId(), 404);
+        if (!repository.existsById(id)) {
+            throw new ServiceException("SpaceShip not found with id: " + id, 404);
         }
 
         MovieSpaceShip updatedShip = repository.save(movieSpaceShip);

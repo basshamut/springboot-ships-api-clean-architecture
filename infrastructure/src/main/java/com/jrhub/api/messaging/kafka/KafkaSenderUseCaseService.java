@@ -2,7 +2,7 @@ package com.jrhub.api.messaging.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jrhub.api.domain.usecase.alert.LoginAttendMessageSenderUseCase;
+import com.jrhub.api.usecase.alert.LoginAttendMessageSenderUseCase;
 import com.jrhub.api.dto.LoginAttemptDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

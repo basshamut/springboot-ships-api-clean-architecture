@@ -1,4 +1,4 @@
-package com.jrhub.api.infrastructure.config.cache;
+package com.jrhub.api.config.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;

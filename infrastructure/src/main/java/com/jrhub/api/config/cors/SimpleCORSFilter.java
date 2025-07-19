@@ -1,4 +1,4 @@
-package com.jrhub.api.infrastructure.config.cors;
+package com.jrhub.api.config.cors;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

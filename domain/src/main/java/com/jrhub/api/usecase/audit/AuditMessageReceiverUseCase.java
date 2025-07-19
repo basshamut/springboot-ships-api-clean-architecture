@@ -1,4 +1,4 @@
-package com.jrhub.api.domain.usecase.audit;
+package com.jrhub.api.usecase.audit;
 
 public interface AuditMessageReceiverUseCase<T> {
     void receiveAuditMessage(T message);

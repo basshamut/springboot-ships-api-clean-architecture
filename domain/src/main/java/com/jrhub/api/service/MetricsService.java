@@ -1,4 +1,4 @@
-package com.jrhub.api.domain.service;
+package com.jrhub.api.service;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;

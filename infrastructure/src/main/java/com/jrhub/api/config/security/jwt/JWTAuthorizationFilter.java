@@ -1,7 +1,7 @@
 package com.jrhub.api.config.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jrhub.api.domain.exception.ServiceException;
+import com.jrhub.api.exception.ServiceException;
 import com.jrhub.api.dto.HttpErrorInfoDto;
 import com.jrhub.api.utils.FormatUtils;
 import io.jsonwebtoken.ExpiredJwtException;

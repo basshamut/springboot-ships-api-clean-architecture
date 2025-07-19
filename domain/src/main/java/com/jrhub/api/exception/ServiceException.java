@@ -1,4 +1,4 @@
-package com.jrhub.api.domain.exception;
+package com.jrhub.api.exception;
 
 import java.io.Serial;
 

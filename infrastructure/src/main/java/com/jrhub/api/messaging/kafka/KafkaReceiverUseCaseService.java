@@ -2,7 +2,7 @@ package com.jrhub.api.messaging.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jrhub.api.domain.usecase.alert.LoginAttendMessageReceiverUseCase;
+import com.jrhub.api.usecase.alert.LoginAttendMessageReceiverUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.jrhub.api.dto.LoginAttemptDto;
@@ -22,7 +22,7 @@ public class KafkaReceiverUseCaseService implements LoginAttendMessageReceiverUs
     public void loginAttempsReceive(String message) {
         try {
             LoginAttemptDto loginAttempt = objectMapper.readValue(message, LoginAttemptDto.class);
-            log.info("Received login attempt message: User={}, Attempts={}, Timestamp={}", loginAttempt.getUsername(), loginAttempt.getAttempts(), loginAttempt.getTimestamp());
+            log.info("Received login attempt message: User={}, Attempts={}, Timestamp={}", loginAttempt.username(), loginAttempt.attempts(), loginAttempt.timestamp());
         } catch (JsonProcessingException e) {
             log.error("Error deserializing message from JSON: {}", e.getMessage());
             log.error("Original message: {}", message);

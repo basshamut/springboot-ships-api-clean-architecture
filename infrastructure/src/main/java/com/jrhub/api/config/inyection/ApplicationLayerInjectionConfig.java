@@ -1,10 +1,10 @@
 package com.jrhub.api.config.inyection;
 
-import com.jrhub.api.usecase.MovieSpaceShipUseCaseImpl;
-import com.jrhub.api.usecase.UserUseCaseImpl;
 import com.jrhub.api.messaging.rabbitmq.RabbitMQSenderUseCaseService;
 import com.jrhub.api.persistance.repository.MovieSpaceShipSQLRepository;
 import com.jrhub.api.persistance.repository.UserSQLRepository;
+import com.jrhub.api.usecase.MovieSpaceShipUseCaseImpl;
+import com.jrhub.api.usecase.UserUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

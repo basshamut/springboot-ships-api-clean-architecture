@@ -1,6 +1,6 @@
-package com.jrhub.api.domain.usecase.user;
+package com.jrhub.api.usecase.user;
 
-import com.jrhub.api.domain.model.Auth;
+import com.jrhub.api.model.Auth;
 
 public interface UserUseCase {
     Auth loadUserByUsername(String username);

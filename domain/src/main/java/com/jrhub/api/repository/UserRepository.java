@@ -1,6 +1,6 @@
-package com.jrhub.api.domain.repository;
+package com.jrhub.api.repository;
 
-import com.jrhub.api.domain.model.User;
+import com.jrhub.api.model.User;
 
 public interface UserRepository {
     User findByEmail(String username);
